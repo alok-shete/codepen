@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Editor from "./components/Editor";
+import useLocalStorage from "./hooks/useLocalStorage";
+import "./App.css";
 
 function App() {
+  //* setting default data for the variables used to
+  //* store the user data locally.
+  const [html, setHTML] = useLocalStorage("html", "");
+  const [css, setCSS] = useLocalStorage("css", "");
+  const [js, setJS] = useLocalStorage("js", "");
+  const [srcDoc, setsrcDoc] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setsrcDoc(`
+    <html>
+    <body>${html}</body>
+    <style>${css}</style>
+    <script>${js}</script>
+    </html>
+  `);
+    }, 250);
+    return () => clearTimeout(timeout);
+  }, [html, css, js]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="pane top-panel">
+        <Editor
+          language="xml"
+          displayname="HTML"
+          value={html}
+          onChange={setHTML}
+        />
+        <Editor
+          language="css"
+          displayname="CSS"
+          value={css}
+          onChange={setCSS}
+        />
+        <Editor
+          language="javascript"
+          displayname="JAVASCRIPT"
+          value={js}
+          onChange={setJS}
+        />
+      </div>
+      <div className="pane">
+        <iframe
+          srcDoc={srcDoc}
+          title="output"
+          //* to only run scripts and nothing other
+          //* than that.
+          sandbox="allow-scripts"
+          //* no borders.
+          frameBorder="0"
+          width="100%"
+          height="100%"
+        />
+      </div>
+    </>
   );
 }
 
