@@ -1,5 +1,15 @@
-body {
+h5,
+h3 {
   margin: 0;
+  padding: 0;
+}
+
+.bg-color {
+  background-color: #090c10;
+}
+
+.bg-dark {
+  background-color: #161b22 !important;
 }
 
 .top-panel {
@@ -7,7 +17,8 @@ body {
 }
 
 .pane {
-  height: 50vh;
+  position: relative;
+  height: 45vh;
   display: flex;
 }
 

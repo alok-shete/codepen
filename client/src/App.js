@@ -1,63 +1,34 @@
-import React, { useState, useEffect } from "react";
-import Editor from "./components/Editor";
-import useLocalStorage from "./hooks/useLocalStorage";
+import React from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import PlayGround from "./routes/PlayGround";
+// import Navbar from "./components/Navbar";
+
+// import all routes
+import Home from "./routes/home/Home";
+import Login from "./routes/login/Login";
+import Registration from "./routes/registration/Registration";
+import Create from "./routes/create/Create";
+import EditProject from "./routes/editProject/EditProject";
+// import auth
+
+import { AuthRoute } from "./auth/Auth.route";
+
+import { NonAuthRoute } from "./auth/NonAuth.route";
 
 function App() {
-  //* setting default data for the variables used to
-  //* store the user data locally.
-  const [html, setHTML] = useLocalStorage("html", "");
-  const [css, setCSS] = useLocalStorage("css", "");
-  const [js, setJS] = useLocalStorage("js", "");
-  const [srcDoc, setsrcDoc] = useState("");
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setsrcDoc(`
-    <html>
-    <body>${html}</body>
-    <style>${css}</style>
-    <script>${js}</script>
-    </html>
-  `);
-    }, 250);
-    return () => clearTimeout(timeout);
-  }, [html, css, js]);
   return (
     <>
-      <div className="pane top-panel">
-        <Editor
-          language="xml"
-          displayname="HTML"
-          value={html}
-          onChange={setHTML}
-        />
-        <Editor
-          language="css"
-          displayname="CSS"
-          value={css}
-          onChange={setCSS}
-        />
-        <Editor
-          language="javascript"
-          displayname="JAVASCRIPT"
-          value={js}
-          onChange={setJS}
-        />
-      </div>
-      <div className="pane">
-        <iframe
-          srcDoc={srcDoc}
-          title="output"
-          //* to only run scripts and nothing other
-          //* than that.
-          sandbox="allow-scripts"
-          //* no borders.
-          frameBorder="0"
-          width="100%"
-          height="100%"
-        />
-      </div>
+      <Router>
+        <Switch>
+          <AuthRoute exact path="/" component={Home} />
+          <AuthRoute exact path="/create" component={Create} />
+          <AuthRoute exact path="/project/:id" component={EditProject} />
+          <NonAuthRoute exact path="/registration" component={Registration} />
+          <NonAuthRoute exact path="/login" component={Login} />
+          <Route path="*" component={() => "404 NOT FOUND"} />
+        </Switch>
+      </Router>
     </>
   );
 }
