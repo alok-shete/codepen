@@ -18,7 +18,7 @@ export default function Home() {
 
   async function getAllProjects() {
     try {
-      await API.get("project/").then((res) => {
+      await API.get("code/").then((res) => {
         console.log(res.data);
         setProjects(res.data);
         setLoading(true);
