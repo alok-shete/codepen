@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import Logout from "./../../components/Logout";
 
 import API from "./../../api/api";
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
-  let history = useHistory();
+
   useEffect(() => {
     getAllProjects();
     return () => {
@@ -28,24 +29,14 @@ export default function Home() {
     }
   }
 
-  async function Logout() {
-    try {
-      await API.get("user/logout/").then((res) => {
-        history.push(`/login`);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <>
       <div className="bg-color vh-100">
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark ">
           <div className="container">
-            <a className="navbar-brand" href="#h">
-              Expand at sm
-            </a>
+            <Link className="navbar-brand" to="/">
+              Private Codepen
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -61,13 +52,7 @@ export default function Home() {
             <div className="collapse navbar-collapse" id="navbarsExample03">
               <ul className="navbar-nav mr-auto"></ul>
               <div className="my-2 my-md-0">
-                <button
-                  type="button"
-                  className="btn btn-outline-danger"
-                  onClick={() => Logout()}
-                >
-                  Logout
-                </button>
+                <Logout />
               </div>
             </div>
           </div>
@@ -75,11 +60,11 @@ export default function Home() {
         <div className="container">
           <div className="rounded-lg mt-5 mb-5 ml-2 mr-2 bg-dark p-3 text-light row">
             <div className="col-sm">
-              <h3>Create new Project</h3>
+              <h3>Create New Project</h3>
             </div>
             <div className="col-sm-2">
               <Link to="/create">
-                <button className="btn btn-outline-success">create </button>
+                <button className="btn btn-success">Create</button>
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../../api/api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateCss, updateJs, updateHtml } from "../../store/actions";
@@ -8,6 +8,7 @@ import { updateCss, updateJs, updateHtml } from "../../store/actions";
 import Editor from "../../components/Editor";
 
 import PageNotFound from "../../components/PageNotFound";
+import Logout from "./../../components/Logout";
 
 export default function EditProject() {
   let { id } = useParams();
@@ -75,26 +76,67 @@ export default function EditProject() {
         <PageNotFound />
       ) : (
         <>
-          <button onClick={() => updateProject()}>save</button>
-          <div className="pane top-panel">
-            <Editor
-              language="xml"
-              displayname="HTML"
-              value={htmlData}
-              onChange={setHTML}
-            />
-            <Editor
-              language="css"
-              displayname="CSS"
-              value={cssData}
-              onChange={setCSS}
-            />
-            <Editor
-              language="javascript"
-              displayname="JAVASCRIPT"
-              value={jsData}
-              onChange={setJS}
-            />
+          <nav className="navbar navbar-expand-sm navbar-dark bg-dark ">
+            <div className="container">
+              <Link className="navbar-brand" to="/">
+                Private Codepen
+              </Link>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarsExample03"
+                aria-controls="navbarsExample03"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div className="collapse navbar-collapse" id="navbarsExample03">
+                <ul className="navbar-nav mr-auto"></ul>
+                <div className="my-2 my-md-0">
+                  <button
+                    type="button"
+                    className="btn btn-success mr-3"
+                    onClick={() => updateProject()}
+                  >
+                    Save
+                  </button>
+                  <Logout />
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div className="top-panel">
+            <div className="container">
+              <div className="row">
+                <div className="col-sm">
+                  <Editor
+                    language="xml"
+                    displayname="HTML"
+                    value={htmlData}
+                    onChange={setHTML}
+                  />
+                </div>
+                <div className="col-sm">
+                  <Editor
+                    language="css"
+                    displayname="CSS"
+                    value={cssData}
+                    onChange={setCSS}
+                  />
+                </div>
+                <div className="col-sm">
+                  <Editor
+                    language="javascript"
+                    displayname="JAVASCRIPT"
+                    value={jsData}
+                    onChange={setJS}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           <div className="pane">
             <iframe

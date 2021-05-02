@@ -115,7 +115,7 @@ export default function Registration() {
                       type="submit"
                       disabled={isSubmitting}
                     >
-                      Sign in
+                      Sign up
                     </button>
                   </div>
                 </form>
