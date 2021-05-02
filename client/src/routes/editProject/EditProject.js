@@ -28,8 +28,8 @@ export default function EditProject() {
   async function getCode() {
     try {
       await API.get(`code/${id}`).then((res) => {
-        console.log(res.data);
-        console.log(res.data[0].title);
+        // console.log(res.data);
+        // console.log(res.data[0].title);
         setTitle(res.data[0].title);
         disptch(updateHtml(res.data[0].html));
         disptch(updateCss(res.data[0].css));
@@ -54,7 +54,7 @@ export default function EditProject() {
   }
 
   async function updateProject() {
-    console.log("updating");
+    console.log("updating...");
     try {
       await API.post(`code/update`, {
         _id: id,
@@ -63,7 +63,7 @@ export default function EditProject() {
         css: cssData,
         js: jsData,
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       });
     } catch (error) {
       console.log(error.response);

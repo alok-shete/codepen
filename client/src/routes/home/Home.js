@@ -20,7 +20,7 @@ export default function Home() {
   async function getAllProjects() {
     try {
       await API.get("code/").then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProjects(res.data);
         setLoading(true);
       });
@@ -95,7 +95,15 @@ export default function Home() {
                 </Link>
               ))}
             </>
-          ) : null}
+          ) : (
+            <>
+              <div className="text-center">
+                <div className="spinner-border text-dark" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

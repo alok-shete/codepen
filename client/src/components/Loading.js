@@ -1,14 +1,9 @@
 export default function Loading() {
   return (
-    <div className="cust-spinner-main">
-      <div className="cust-spinner-container">
-        <div>
-          <div
-            className="cust-spinner-grow cust-spinner-text-primary"
-            role="status"
-          >
-            <span className="cust-spinner-sr-only"></span>
-          </div>
+    <div className="vh-100">
+      <div className="text-center loading">
+        <div className="spinner-border text-dark" role="status">
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     </div>

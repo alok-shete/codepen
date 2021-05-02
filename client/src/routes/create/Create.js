@@ -24,7 +24,7 @@ export default function Create() {
           onSubmit={async (values, { setSubmitting }) => {
             try {
               await API.post(`code/add`, values).then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 history.push(`/project/${res.data._id}`);
               });
             } catch (error) {

@@ -23,7 +23,7 @@ export const AuthRoute = (props) => {
   async function loginCheck() {
     try {
       await API.get("user/check").then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsAuthenticated(true);
         setLoading(false);
         setData(res.data);

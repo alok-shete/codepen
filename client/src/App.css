@@ -67,67 +67,6 @@ h3 {
 }
 
 /* loading Spinner */
-
-.cust-spinner-main {
-  height: 100vh;
-}
-
-.cust-spinner-container {
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cust-spinner-text-primary {
-  color: hsl(225, 6%, 12%);
-}
-
-.cust-spinner-container {
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@keyframes cust-spinner-grow {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.cust-spinner-grow {
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  vertical-align: text-bottom;
-  background-color: currentColor;
-  border-radius: 50%;
-  opacity: 0;
-  animation: cust-spinner-grow 0.75s linear infinite;
-}
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
+.loading {
+  padding-top: 45vh;
 }
