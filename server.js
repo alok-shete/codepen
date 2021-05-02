@@ -27,6 +27,13 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
+// api
+const codesRouter = require("./routes/codes");
+const usersRouter = require("./routes/users");
+
+app.use("/api/code", codesRouter);
+app.use("/api/user", usersRouter);
+
 // check env
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -34,13 +41,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
-// api
-const codesRouter = require("./routes/codes");
-const usersRouter = require("./routes/users");
-
-app.use("/api/code", codesRouter);
-app.use("/api/user", usersRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
